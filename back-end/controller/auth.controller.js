@@ -2,12 +2,49 @@ import bcrypt from "bcryptjs/dist/bcrypt.js";
 import User from "../model/user.model.js";
 import generalTokenAndSetCookie from "../utils/generalToken/jwtToken.js";
 
-export const loginUser = (req, res) =>{
-    res.send("Login!");
+export const loginUser = async (req, res) =>{
+    try{
+        const {username, password} = req.body;
+
+        const user = await User.findOne({username});//.select("+password");
+        if(!user){
+            return res.status(400).json({error: "username not found"});
+        }
+        const isMatchPassword = await bcrypt.compare(password, user.password);
+
+        if(!isMatchPassword){
+            return res.status(400).json({error: "Invalid Credentials (password incorrect)"});
+        }
+
+        generalTokenAndSetCookie(user.id, res);
+        
+        res.status(200).json({
+            message: "Login Success",
+            user: {
+                id: user.id,
+                fullName: user.fullName,
+                username: user.username,
+                gender: user.gender,
+                profilePic: user.profilePic
+            }
+        });
+        
+    }catch(e){
+        console.error(e.message);
+        return res.status(500).json({error: "Server error"});
+    }
 }
 
-export const logoutUser = (req, res) =>{
-    res.send("Logout!");
+export const logoutUser = async (req, res) =>{
+    try{
+        res.cookie("jwt", "", {
+            maxAge: 0
+        });
+        res.status(200).json({message: "Logout successfully"});
+    }catch(e){
+        console.error(e.message);
+        return res.status(500).json({error: "Server error"});
+    }
 }
 
 export const signupUser = async (req, res) =>{
@@ -70,7 +107,7 @@ export const signupUser = async (req, res) =>{
             res.status(400).json({error: "Failed to create user!"});
         }
     }catch (e){
-        console.log(e.message);
+        // console.error(e.message);
         res.status(500).json({error: "Internal Server Error!"});
     }
 }
