@@ -2,9 +2,9 @@
   "name": "web-chatting",
   "version": "1.0.0",
   "description": "## Front-end: React, Vite, Tailwind, Daisy UI ## Back-end: Node.js, Express, MongoDB, socket.io, MERN",
-  "main": "index.js",
+  "main": "back-end/server.js",
   "scripts": {
-    "server": "nodemon /web-chatting/back-end/server.js"
+    "server": "nodemon back-end/server.js"
   },
   "type": "module",
   "keywords": [],
