@@ -107,7 +107,7 @@ export const signupUser = async (req, res) =>{
             res.status(400).json({error: "Failed to create user!"});
         }
     }catch (e){
-        // console.error(e.message);
+        console.error("Error in auth controller: ", e.message);
         res.status(500).json({error: "Internal Server Error!"});
     }
 }
