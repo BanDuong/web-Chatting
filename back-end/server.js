@@ -5,6 +5,7 @@ import connectToMongoDB from "./db/connectToMongoDB.js";
 import authRouter from "./router/auth.router.js";
 import homePageRouter from "./router/homepage.router.js";
 import messageRouter from "./router/message.router.js";
+import userRouter from "./router/user.router.js";
 
 // common
 const app = express();
@@ -25,6 +26,8 @@ app.use("/api/auth", authRouter);
 // message API
 app.use("/api/message", messageRouter);
 
+// show another User API
+app.use("/api/users", userRouter);
 app.listen(PORT, () => {
     console.log(`Server Running port http://localhost:${PORT}`);
     connectToMongoDB();
