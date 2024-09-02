@@ -23,6 +23,8 @@
 - make '.env' file --> set 'PORT=8000' in '.env' file --> code in 'server.js' file to connect to PORT
 - add ("type": "module",) in 'package.json' file
 
-
-
+----------------------------------Key search something-----------------------------
+- glassmorphism tailwind css
+- Install daisyUI as a Tailwind CSS plugin: [daisuUI](https://daisyui.com/docs/install/)
+- Install react-icons: [react-icons](https://www.npmjs.com/package/react-icons)
 
