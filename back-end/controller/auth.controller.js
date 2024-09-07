@@ -4,11 +4,11 @@ import generalTokenAndSetCookie from "../utils/generalToken/jwtToken.js";
 
 export const loginUser = async (req, res) =>{
     try{
-        const {username, password} = req.body;
+        const {email, password} = req.body;
 
-        const user = await User.findOne({username});//.select("+password");
+        const user = await User.findOne({email});//.select("+password");
         if(!user){
-            return res.status(400).json({error: "username not found"});
+            return res.status(400).json({error: "Not email"});
         }
         const isMatchPassword = await bcrypt.compare(password, user.password);
 
@@ -23,7 +23,7 @@ export const loginUser = async (req, res) =>{
             user: {
                 id: user.id,
                 fullName: user.fullName,
-                username: user.username,
+                email: user.email,
                 gender: user.gender,
                 profilePic: user.profilePic
             }
@@ -49,22 +49,22 @@ export const logoutUser = async (req, res) =>{
 
 export const signupUser = async (req, res) =>{
     try{
-        let {fullName, username, password, confirmPassword, gender} = req.body;
+        let {fullName, email, password, confirmPassword, gender} = req.body;
 
         if(password !== confirmPassword){
             return res.status(400).json({error: "Password don't match"});
         }
 
-        const user = await User.findOne({username});
+        const user = await User.findOne({email});
 
         if(user){
-            return res.status(400).json({error: "Username already exists"});
+            return res.status(400).json({error: "Email already exists"});
         }
 
         // web avarta API online
         // https://avatar-placeholder.iran.liara.run/document
-        const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
-        const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
+        const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${email}`;
+        const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${email}`;
 
         // HASH password
         const salt = 12; // length hash
@@ -84,7 +84,7 @@ export const signupUser = async (req, res) =>{
 
         const newUser = new User({
             fullName,
-            username,
+            email,
             password,
             gender,
             profilePic: gender === "male"? boyProfilePic : girlProfilePic
@@ -98,7 +98,7 @@ export const signupUser = async (req, res) =>{
             res.status(201).json({
                 id: newUser.id,
                 fullName: newUser.fullName,
-                username: newUser.username,
+                email: newUser.email,
                 password: newUser.password,
                 gender: newUser.gender,
                 profilePic: newUser.profilePic

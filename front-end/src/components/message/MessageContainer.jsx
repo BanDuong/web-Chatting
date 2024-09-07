@@ -25,7 +25,7 @@ export const MessageContainer = () => {
 const NoChatSelected = () =>{
   return(
     <div className='flex items-center justify-center w-full h-full'>
-      <img src='hello.png' className='size-56'></img>
+      <img src='hinh-anh-vay-tay-chao-powerpoint-dep_021900843.gif' className='size-66'></img>
     </div>
   );
 };
