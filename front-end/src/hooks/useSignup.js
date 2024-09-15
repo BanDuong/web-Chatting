@@ -30,9 +30,9 @@ export const useSignup = () => {
             }
             
             // localStorage
-            localStorage.setItem("chat-user", JSON.stringify(data));
+            localStorage.setItem("chat-user", JSON.stringify(data.user));
             // Auth Context
-            setAuthUser(data);
+            setAuthUser(data.user);
         }catch(e){
             console.error(e.message);
             toast.error('Sigup error!');

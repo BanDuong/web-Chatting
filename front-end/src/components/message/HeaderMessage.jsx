@@ -2,18 +2,18 @@ import React from 'react';
 import { IoMdPersonAdd } from "react-icons/io";
 import { MdMoreVert, MdVideoCall, MdWifiCalling3 } from "react-icons/md";
 
-export const HeaderMessage = () => {
+export const HeaderMessage = ({selectedConversation}) => {
   return (
     <div className='header-user flex items-center justify-between font-semibold'>
         <div className='flex items-center'>
             <div className="avatar online m-2 cursor-pointer">
                 <div className="w-12 rounded-full">
-                    <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                    <img src={selectedConversation.profilePic} alt="error" />
                 </div>
             </div>
 
             <div className='cursor-pointer'>
-                <p><span className='text-white'>JohnWick</span></p>
+                <p><span className='text-white'>{selectedConversation.fullName}</span></p>
             </div>
         </div>
             

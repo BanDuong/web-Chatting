@@ -7,7 +7,8 @@ const generalTokenAndSetCookie = (userId, res) =>{
         httpOnly: true, // prevent XSS attack
         sameSite: "strict", // prevent CSRF attack
         secure: process.env.NODE_ENV !== "development",
-        maxAge: 15 * 24 * 60 * 60 * 1000 // D/H/M/S/miniS
+        maxAge: 7 * 24 * 60 * 60 * 1000 // D/H/M/S/miniS
+        // maxAge: 10 * 1000 // 10s
     });
 }
 

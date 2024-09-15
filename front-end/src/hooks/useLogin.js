@@ -19,18 +19,17 @@ export const useLogin = () => {
                 },
                 body: JSON.stringify({email, password})
             });
-            // console.log(res.json());
-            // if(!res.ok){
-            //     throw new Error('featch data error');
-            // }
+            if(!res.ok){
+                throw new Error('featch data error');
+            }
             
             const data = await res.json();
             if(data.error){
                 throw new Error(data.error);
             }
 
-            localStorage.setItem("chat-user", JSON.stringify(data));
-            setAuthUser(data);
+            localStorage.setItem("chat-user", JSON.stringify(data.user));
+            setAuthUser(data.user);
 
         } catch (e) {
             console.error(e.message);

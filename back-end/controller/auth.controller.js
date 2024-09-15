@@ -96,12 +96,15 @@ export const signupUser = async (req, res) =>{
             await generalTokenAndSetCookie(newUser.id, res);
 
             res.status(201).json({
-                id: newUser.id,
-                fullName: newUser.fullName,
-                email: newUser.email,
-                password: newUser.password,
-                gender: newUser.gender,
-                profilePic: newUser.profilePic
+                message: "Create user successful!",
+                user:{
+                    id: newUser.id,
+                    fullName: newUser.fullName,
+                    email: newUser.email,
+                    password: newUser.password,
+                    gender: newUser.gender,
+                    profilePic: newUser.profilePic
+                }
             });
         }else{
             res.status(400).json({error: "Failed to create user!"});

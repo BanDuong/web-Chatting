@@ -1,5 +1,6 @@
 import Conversation from "../model/conversation.model.js";
 import Message from "../model/message.model.js";
+import { getReceiverSocketId, io } from "../socket/socket.js";
 
 export const sendMessage = async (req, res) =>{
     try{
@@ -8,30 +9,37 @@ export const sendMessage = async (req, res) =>{
         const senderId = req.user.id; // User ID send message
 
         let conversation = await Conversation.findOne({
-            participants: {$all: [senderId, receiverId]} // $ is syntaxt of Mongo
+            participants: {$all: [senderId, receiverId]}, // $ is syntaxt of Mongo
         });
 
         if(!conversation){
             // conversation = new Conversation({participants: [senderId, receiverId]});
             // await conversation.save();
             conversation = await Conversation.create({
-                participants: [senderId, receiverId]
+                participants: [senderId, receiverId],
             });
         }
 
         const newMessage = new Message({
             senderId,
             receiverId,
-            message
+            message,
         });
 
         if(newMessage){
-            await newMessage.save();
             conversation.messages.push(newMessage.id);
-            await conversation.save();
-            return res.status(201).json(newMessage);
         }
-        // res.status(201).json(newMessage);
+
+        await Promise.all([conversation.save(), newMessage.save()]);
+
+        const receiverSocketId = getReceiverSocketId(receiverId);
+
+        if(receiverSocketId){
+            io.to(receiverSocketId).emit("newMessage", newMessage);
+        }
+        
+
+        res.status(201).json(newMessage);
     }catch(e){
         console.error(e.message);
         return res.status(500).json({error: "Server error"});

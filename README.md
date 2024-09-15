@@ -27,13 +27,16 @@
 - cmd: npm i react-router-dom
 - cmd: npm i react-hot-toast ([react-hot-toast](https://react-hot-toast.com/))
 - add <Toaster/> in your App.jsx
+- cmd: npm install zustand (in front-end folder)
+- cmd: npm i socket.io-client (in front-end folder)
+
 ----------------------------------Key search something-----------------------------
 - glassmorphism tailwind css
 - Install daisyUI as a Tailwind CSS plugin: [daisuUI](https://daisyui.com/docs/install/)
 - Install react-icons: [react-icons](https://www.npmjs.com/package/react-icons)
 - react-router-doom: <BrowserRouter/>; <Routes>
 - react-dom: <Link> instead of <a> tag;
-
+- search "skeleton" in daisyui
 
 --------------------------------Flow-connect-----------------------------
 1. Sigup forward to Login:
