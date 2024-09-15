@@ -26,7 +26,7 @@ export const Message = ({message}) => {
         <div className={`message ${bubbleBgColor} chat-bubble text-white max-w-80`}>
           {message.message}
         </div>
-        {/* <div className={`chat-footer text-xs opacity-50`}> {message.createdAt.split("T")[1].substring(0,5)}</div> */}
+        <div className={`chat-footer text-xs opacity-50`}> {message.createdAt.split("T")[1].substring(0,5)}</div>
     </div>
   )
 }

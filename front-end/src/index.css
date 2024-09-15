@@ -8,7 +8,7 @@ body{
   background-size: cover; /* cover size screen*/
   background-position: center;
   background-attachment: fixed; /*fix cung background k bi troi khi scroll*/
-  background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('bgr-img.png');
+  background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('../dist/bgr-img.png');
 }
 
 /* drank mode looking scrollbar*/

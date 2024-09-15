@@ -17,6 +17,7 @@
     "react-icons": "^5.3.0",
     "react-router-dom": "^6.26.1",
     "socket.io-client": "^4.7.5",
+    "web-chatting": "file:..",
     "zustand": "^4.5.5"
   },
   "devDependencies": {

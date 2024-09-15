@@ -4,7 +4,9 @@
   "description": "## Front-end: React, Vite, Tailwind, Daisy UI ## Back-end: Node.js, Express, MongoDB, socket.io, MERN",
   "main": "back-end/server.js",
   "scripts": {
-    "server": "nodemon back-end/server.js"
+    "server": "nodemon back-end/server.js",
+    "start": "node back-end/server.js",
+    "build": "npm install && npm install --prefix front-end && npm run build --prefix front-end"
   },
   "type": "module",
   "keywords": [],
